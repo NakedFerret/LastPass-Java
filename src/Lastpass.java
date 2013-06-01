@@ -19,15 +19,6 @@ public class Lastpass {
 			int iterations) {
 		byte[] key = getKey(username, password, iterations);
 		
-//		System.out.println("Testing getHash: \n" + BinTools.bin2hex(key));
-//		String s;
-//		try {
-//			s = new String(key, "Latin1");
-//			System.out.println(Arrays.equals(key, s.getBytes("Latin1")));
-//		} catch (UnsupportedEncodingException e1) {
-//			e1.printStackTrace();
-//		}
-		
 		PBKDF2Parameters p = new PBKDF2Parameters("HmacSHA256", "Latin1",
 				password.getBytes(), 1);
 		PBKDF2Engine e = new PBKDF2Engine(p);
