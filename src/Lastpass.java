@@ -18,7 +18,7 @@ public class Lastpass {
 	public static String getHash(String username, String password,
 			int iterations) {
 		byte[] key = getKey(username, password, iterations);
-		
+
 		PBKDF2Parameters p = new PBKDF2Parameters("HmacSHA256", "Latin1",
 				password.getBytes(), 1);
 		PBKDF2Engine e = new PBKDF2Engine(p);
@@ -29,6 +29,13 @@ public class Lastpass {
 		}
 
 		return BinTools.bin2hex(p.getDerivedKey());
+	}
+
+	public static void parse(String blob, String key) {
+		// def _parse(self):
+		// self.chunks =
+		// self._parse_chunks(self._extract_chunks(self._decode_blob(self.blob)))
+
 	}
 
 }
