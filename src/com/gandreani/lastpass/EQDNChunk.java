@@ -4,14 +4,12 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.List;
 
-import de.rtner.misc.BinTools;
-
 public class EQDNChunk extends Chunk {
 
 	//@formatter:off //Eclipse formatting
 	public final List<ChunkItem> items = Arrays.asList(
 			new ChunkItem("id", null), 
-			new ChunkItem("domain", "hex")
+			new ChunkItem("domain", ChunkItem.Encoding.HEX)
 			);
 	//@formatter:on 
 
@@ -37,7 +35,7 @@ public class EQDNChunk extends Chunk {
 
 		if (i.encoding == null)
 			i.data = new String(data);
-		else if (i.encoding.equalsIgnoreCase("hex"))
+		else if (i.encoding == ChunkItem.Encoding.HEX)
 			i.data = new String(Utils.hexToUTF8(data));
 
 	}
