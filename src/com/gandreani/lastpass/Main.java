@@ -1,4 +1,5 @@
 package com.gandreani.lastpass;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.security.InvalidAlgorithmParameterException;
@@ -46,18 +47,28 @@ public class Main {
 		} else if (c.type.equals("ENCU")) {
 			System.out.println("ENCU " + decryptPayload(c.payload));
 		} else if (c.type.equals("EQDN")) {
+
 			EQDNChunk chunk = EQDNChunk.makeFromChunk(c);
 			chunk.parseItems();
 			System.out.println(c.type);
-			for( ChunkItem i : chunk.items){
+			for (ChunkItem i : chunk.items) {
 				System.out.println(i.name + " " + i.data);
 			}
-			
+
+		} else if (c.type.equals("ACCT")) {
+
+			ACCTChunk chunk = ACCTChunk.makeFromChunk(c);
+			chunk.parseItems();
+			System.out.println(c.type);
+			for (ChunkItem i : chunk.items) {
+				System.out.println(i.name + " " + i.data);
+			}
+
 		}
 
 	}
 
-	private static String decryptPayload(byte[] payload) {
+	public static String decryptPayload(byte[] payload) {
 		int length = payload.length;
 		int length16 = length % 16;
 		int length64 = length % 64;
@@ -68,26 +79,29 @@ public class Main {
 
 		} else if (length16 == 0) {
 
-			return decodeAES("ecb", null, payload); // ecb, plain
+			System.out.println("AES: ecb plain");// ecb, plain
+			return decodeAES("ecb", null, payload);
 
 		} else if (length64 == 0 || length64 == 24 || length64 == 44) {
 
+			System.out.println("AES: ecb base64");// ecb, base64
 			return decodeAES("ecb", null,
 					decodeBase64String(new String(payload)));
 
 		} else if (length16 == 1) {
 
+			System.out.println("AES: cbc plain");// ecb, plain
 			ByteBuffer buf = ByteBuffer.wrap(payload);
-			byte[] iv = new byte[17];
-			byte[] data = new byte[payload.length - 18]; // all the bytes after
+			byte[] iv = new byte[16];
+			byte[] data = new byte[payload.length - 17]; // all the bytes after
 			buf.get(); // Throw away the first byte
 			buf.get(iv);
 			buf.get(data);
-			return decodeAES("cbc", decodeBase64String(new String(iv)),
-					decodeBase64String(new String(data)));
+			return decodeAES("cbc", iv,data);
 
 		} else if (length64 == 6 || length64 == 26 || length64 == 50) {
-			// cbc base64
+
+			System.out.println("AES: cbc base64");// cbc, base64
 			ByteBuffer buf = ByteBuffer.wrap(payload);
 			byte[] iv = new byte[25];
 			byte[] data = new byte[payload.length - 26]; // all the bytes after
