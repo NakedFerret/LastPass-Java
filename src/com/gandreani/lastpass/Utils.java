@@ -2,7 +2,7 @@ package com.gandreani.lastpass;
 
 import de.rtner.misc.BinTools;
 
-public class Util {
+public class Utils {
 
 	public static String hexToUTF8(byte[] hex) {
 		//TODO actually return a UTF-8 string
