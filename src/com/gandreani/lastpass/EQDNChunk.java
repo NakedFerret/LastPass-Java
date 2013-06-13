@@ -38,15 +38,8 @@ public class EQDNChunk extends Chunk {
 		if (i.encoding == null)
 			i.data = new String(data);
 		else if (i.encoding.equalsIgnoreCase("hex"))
-			i.data = new String(hexToUTF8(data));
+			i.data = new String(Util.hexToUTF8(data));
 
 	}
 
-	public static String hexToUTF8(byte[] hex) {
-		return hexToUTF8(new String(hex));
-	}
-
-	public static String hexToUTF8(String hex) {
-		return new String(BinTools.hex2bin(hex));
-	}
 }
