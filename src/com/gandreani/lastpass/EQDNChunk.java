@@ -1,4 +1,5 @@
 package com.gandreani.lastpass;
+
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.List;
@@ -17,14 +18,12 @@ public class EQDNChunk extends Chunk {
 	public EQDNChunk(String type, int size, byte[] payload) {
 		super(type, size, payload);
 	}
-	
-	public void parseItems(){
-		System.out.println(type + " chunk --- payload size: " + payload.length);
+
+	public void parseItems() {
 		ByteBuffer buf = ByteBuffer.wrap(payload);
 		for (ChunkItem i : items) {
 			parseItem(i, buf);
 		}
-		System.out.println("-----");
 	}
 
 	public static EQDNChunk makeFromChunk(Chunk c) {
@@ -32,28 +31,22 @@ public class EQDNChunk extends Chunk {
 	}
 
 	private void parseItem(ChunkItem i, ByteBuffer buf) {
-		System.out.println("**\nchunk item: " + i.name);
 		int size = buf.getInt();
-		System.out.println("size: " + size);
-		
 		byte[] data = new byte[size];
 		buf.get(data);
-		
-		System.out.print("data: ");
+
 		if (i.encoding == null)
-			System.out.println(new String(data));
-		else if(i.encoding.equalsIgnoreCase("hex")) {
-			System.out.println(hexToUTF8(data));
-		}
-		
-		System.out.println("**");
+			i.data = new String(data);
+		else if (i.encoding.equalsIgnoreCase("hex"))
+			i.data = new String(hexToUTF8(data));
+
 	}
-	
-	public static String hexToUTF8(byte[] hex){
+
+	public static String hexToUTF8(byte[] hex) {
 		return hexToUTF8(new String(hex));
 	}
-	
-	public static String hexToUTF8(String hex){
+
+	public static String hexToUTF8(String hex) {
 		return new String(BinTools.hex2bin(hex));
 	}
 }

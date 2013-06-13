@@ -48,6 +48,10 @@ public class Main {
 		} else if (c.type.equals("EQDN")) {
 			EQDNChunk chunk = EQDNChunk.makeFromChunk(c);
 			chunk.parseItems();
+			System.out.println(c.type);
+			for( ChunkItem i : chunk.items){
+				System.out.println(i.name + " " + i.data);
+			}
 			
 		}
 
