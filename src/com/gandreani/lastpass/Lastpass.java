@@ -1,3 +1,4 @@
+package com.gandreani.lastpass;
 import java.io.UnsupportedEncodingException;
 
 import de.rtner.misc.BinTools;

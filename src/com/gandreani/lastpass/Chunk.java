@@ -1,3 +1,4 @@
+package com.gandreani.lastpass;
 public class Chunk {
 	String type;
 	int size;

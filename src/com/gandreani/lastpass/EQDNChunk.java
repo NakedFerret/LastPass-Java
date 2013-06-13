@@ -1,3 +1,4 @@
+package com.gandreani.lastpass;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.List;

@@ -1,3 +1,4 @@
+package com.gandreani.lastpass.test;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
@@ -5,6 +6,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
 import org.junit.Test;
+
+import com.gandreani.lastpass.Lastpass;
 
 import de.rtner.misc.BinTools;
 

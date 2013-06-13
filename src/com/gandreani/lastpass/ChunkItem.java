@@ -1,3 +1,4 @@
+package com.gandreani.lastpass;
 public class ChunkItem {
 	public String name;
 	public String encoding;
