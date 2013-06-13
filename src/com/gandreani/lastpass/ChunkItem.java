@@ -14,7 +14,7 @@ public class ChunkItem {
 
 	public ChunkItem(String name, Encoding encoding) {
 		super();
-		this.name = name;
+		this.name = name;	
 		this.encoding = encoding;
 	}
 
@@ -26,7 +26,8 @@ public class ChunkItem {
 		switch (encoding) {
 		
 		case AES:
-			// TODO decode aes chunkitem data
+			data = Main.decryptPayload(dataInBinary);
+			System.out.print("");
 			break;
 		case HEX:
 			data = Utils.hexToUTF8(dataInBinary);

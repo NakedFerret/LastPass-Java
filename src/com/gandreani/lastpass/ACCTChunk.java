@@ -1,5 +1,6 @@
 package com.gandreani.lastpass;
 
+import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.List;
 
@@ -46,6 +47,13 @@ public class ACCTChunk extends Chunk {
 
 	public static ACCTChunk makeFromChunk(Chunk c) {
 		return new ACCTChunk(c.type, c.size, c.payload);
+	}
+	
+	public void parseItems() {
+		ByteBuffer buf = ByteBuffer.wrap(payload);
+		for (ChunkItem i : items) {
+			i.parseData(buf);
+		}
 	}
 
 }
