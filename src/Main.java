@@ -46,6 +46,7 @@ public class Main {
 			System.out.println("ENCU " + decryptPayload(c.payload));
 		} else if (c.type.equals("EQDN")) {
 			EQDNChunk chunk = EQDNChunk.makeFromChunk(c);
+			chunk.parseItems();
 			
 		}
 
