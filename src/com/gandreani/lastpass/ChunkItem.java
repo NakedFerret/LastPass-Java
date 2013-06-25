@@ -14,28 +14,27 @@ public class ChunkItem {
 
 	public ChunkItem(String name, Encoding encoding) {
 		super();
-		this.name = name;	
+		this.name = name;
 		this.encoding = encoding;
 	}
 
-	public void parseData(ByteBuffer buf) {
+	public void parseData(ByteBuffer buf, byte[] key) {
 		int size = buf.getInt();
 		byte[] dataInBinary = new byte[size];
 		buf.get(dataInBinary);
 
 		switch (encoding) {
-		
-		case AES:
-			data = Main.decryptPayload(dataInBinary);
-			System.out.print("");
-			break;
-		case HEX:
-			data = Utils.hexToUTF8(dataInBinary);
-			break;
 
-		default:
-			data = new String(dataInBinary);
-			break;
+			case AES:
+				data = Parser.decryptPayload(dataInBinary, key);
+				break;
+			case HEX:
+				data = Utils.hexToUTF8(dataInBinary);
+				break;
+
+			default:
+				data = new String(dataInBinary);
+				break;
 		}
 
 	}

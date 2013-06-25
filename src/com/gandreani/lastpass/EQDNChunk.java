@@ -21,10 +21,10 @@ public class EQDNChunk extends Chunk {
 		return new EQDNChunk(c.type, c.size, c.payload);
 	}
 
-	public void parseItems() {
+	public void parseItems(byte[] key) {
 		ByteBuffer buf = ByteBuffer.wrap(payload);
 		for (ChunkItem i : items) {
-			i.parseData(buf);
+			i.parseData(buf, key);
 		}
 	}
 

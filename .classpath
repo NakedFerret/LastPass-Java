@@ -7,7 +7,7 @@
 			<accessrule kind="accessible" pattern="sun/misc/**"/>
 		</accessrules>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/PBKDF2"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/PBKDF2"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
